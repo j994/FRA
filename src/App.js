@@ -115,10 +115,12 @@ class App extends React.Component {
         <Particles className='particles'
         params={particlesOptions}
         />
-        <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
+        <div className='banner'>
+          <Logo />
+          <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
+        </div>
         { this.state.route === 'home'
         ? <div>
-            <Logo />
             <Rank name={this.state.user.name} enteries={this.state.user.enteries}/>
             <ImageLinkForm 
               onInputChange={this.onInputChange} 

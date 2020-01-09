@@ -42,6 +42,13 @@
   z-index: -1;
 }
 
+.banner {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  margin-top: 1%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
