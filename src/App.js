@@ -24,23 +24,25 @@ const particlesOptions = {
   }
 }
 
+const initialState = {
+    input: '',
+    imageUrl: '',
+    box: {},
+    route: 'signin',
+    isSignedIn: false,
+    user: {
+      id: '',
+      name: '',
+      email: '',
+      entries: 0,
+      joined: ''
+    }
+}
+
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        enteries: 0,
-        joined: ''
-      }
-    }
+    this.state = initialState;
   }
 
   loadUser = (data) => {
@@ -48,7 +50,7 @@ class App extends React.Component {
       id: data.id,
       name: data.name,
       email: data.email,
-      enteries: data.enteries,
+      entries: data.entries,
       joined: data.joined
     }})
   }
@@ -90,8 +92,9 @@ class App extends React.Component {
         })
         .then(response => response.json())
         .then(count => {
-          this.setState(Object.assign(this.state.user, {enteries: count}))
+          this.setState(Object.assign(this.state.user, {entries: count}))
         })
+        .catch(console.log)
       }
       this.displayFaceBox(this.calculateFaceLocation(response));    
     })
@@ -102,7 +105,7 @@ class App extends React.Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({isSignedIn: false})
+      this.setState(initialState)
     } else if (route === 'home') {
       this.setState({isSignedIn: true})
     }
@@ -121,7 +124,7 @@ class App extends React.Component {
         </div>
         { this.state.route === 'home'
         ? <div>
-            <Rank name={this.state.user.name} enteries={this.state.user.enteries}/>
+            <Rank name={this.state.user.name} entries={this.state.user.entries}/>
             <ImageLinkForm 
               onInputChange={this.onInputChange} 
               onButtonSubmit={this.onButtonSubmit}/>
